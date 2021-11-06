@@ -2,10 +2,9 @@ import numpy as np
 
 
 n = 2
-X1 = 10
+X1 = 5
 X2 = 4
-mu1 = 1
-mu2 = 1
+mu = 1
 
 MAX_TIME = 10
 CURRENT_TIME = 0
@@ -73,17 +72,17 @@ def main():
             if len(smo) == n:   # Для заявки 2 не нашлось места
                 failure2 += 1
             else:   # Если есть пустое место, добавляем заявку
-                smo.append(time + np.random.exponential(1 / mu2))
+                smo.append(time + np.random.exponential(1 / mu))
                 smo_type.insert(len(smo) - 1, '2')
 
         if event_name == 'request1':
             requests1.remove(time)
             if len(smo) < n:    # Если есть пустое место, добавляем заявку
-                smo.append(time + np.random.exponential(1 / mu1))
+                smo.append(time + np.random.exponential(1 / mu))
                 smo_type.insert(len(smo) - 1, '1')
             elif '2' in smo_type:   # В смо есть заявка второго типа
                 index = smo_type.index('2')
-                smo[index] = time + np.random.exponential(1 / mu1)
+                smo[index] = time + np.random.exponential(1 / mu)
                 smo_type[index] = '1'
 
                 failure2 += 1
